@@ -1,0 +1,4 @@
+interface:
+  display_name: "Add Feature Entry"
+  short_description: "Append formatted feature entries."
+  default_prompt: "Use $add-feature-entry to add a new entry to features-implemented.md with the required format and default status behavior."

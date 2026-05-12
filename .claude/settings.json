@@ -1,0 +1,71 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(*node ai-tools/hooks/log-prompts/log_prompt.js manual-start*)",
+      "Bash(*node ai-tools/hooks/log-prompts/log_prompt.js manual-finalize*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ai-tools/hooks/protect-files/protect-files.js",
+            "shell": "powershell",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ai-tools/hooks/protect-files/protect-files.js",
+            "shell": "powershell",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$root = if ($env:CLAUDE_PROJECT_DIR) { $env:CLAUDE_PROJECT_DIR } else { (Get-Location).Path }; node (Join-Path $root 'ai-tools/hooks/log-prompts/log_prompt.js') start",
+            "shell": "powershell",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$root = if ($env:CLAUDE_PROJECT_DIR) { $env:CLAUDE_PROJECT_DIR } else { (Get-Location).Path }; node (Join-Path $root 'ai-tools/hooks/log-prompts/log_prompt.js') finalize",
+            "shell": "powershell",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$root = if ($env:CLAUDE_PROJECT_DIR) { $env:CLAUDE_PROJECT_DIR } else { (Get-Location).Path }; node (Join-Path $root 'ai-tools/hooks/log-prompts/log_prompt.js') session-end",
+            "shell": "powershell",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

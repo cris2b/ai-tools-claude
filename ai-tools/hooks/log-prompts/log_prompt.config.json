@@ -1,0 +1,41 @@
+{
+  "log_root": "ai-tools/local/logs/prompts",
+  "pending_dir": "ai-tools/local/logs/prompts/.pending",
+  "nolog_state_file": "ai-tools/local/logs/prompts/.nolog-state.json",
+  "inline_file_max_bytes": 32768,
+  "no_log_keywords": [
+    "no logues",
+    "no loguees",
+    "no logees",
+    "no lo logees",
+    "no loguear",
+    "don't log",
+    "do not log",
+    "dont log",
+    "skip log",
+    "skip logging",
+    "no log this"
+  ],
+  "nolog_ambiguous_markers": [
+    "for now",
+    "un rato",
+    "por ahora",
+    "a bit",
+    "temporarily"
+  ],
+  "nolog_scope_session": [
+    "this session",
+    "esta sesion",
+    "esta sesión",
+    "whole session"
+  ],
+  "nolog_scope_today": [
+    "today",
+    "hoy",
+    "all today",
+    "todo hoy"
+  ],
+  "nolog_scope_count_regex": [
+    "(?:next|los?\\s+proximos?|próximos?)\\s+(\\d+)"
+  ]
+}

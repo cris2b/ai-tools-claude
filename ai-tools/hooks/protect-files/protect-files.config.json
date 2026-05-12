@@ -1,0 +1,15 @@
+{
+  "blocked_paths": [
+    ".env",
+    ".env.*",
+    "**/.env",
+    "**/.env.*"
+  ],
+  "allow_paths": [
+    ".env.example",
+    ".env.sample",
+    "**/.env.example",
+    "**/.env.sample"
+  ],
+  "case_sensitive": false
+}
