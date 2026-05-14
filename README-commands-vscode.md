@@ -6,16 +6,18 @@ This document records the custom VS Code terminal shortcuts used on this machine
 
 | Shortcut | Action |
 | --- | --- |
-| `alt+[Semicolon]` | Show/hide the integrated terminal using the physical `ñ` key on Spanish keyboards |
-| `alt+shift+[Semicolon]` | Create a new integrated terminal using the physical `ñ` key on Spanish keyboards |
+| `alt+[Backquote]` | Show/hide the integrated terminal using the physical `º` key on Spanish keyboards |
+| `alt+shift+q` | Create a new integrated terminal |
+| `alt+q` | Focus the integrated terminal without opening or closing it |
 | `alt+j` | Show/hide the bottom panel |
-| `alt+q` | Close the focused terminal |
+| `alt+f2` | Rename the focused terminal (works from tabs or terminal) |
+| `alt+x` | Close the focused terminal |
 | `alt+1` to `alt+9` | Focus terminal by tab number |
 | `alt+w` | Focus previous terminal |
 | `alt+s` | Focus next terminal |
 | `shift+enter` | Send `Escape` + `Enter` to the focused terminal |
 
-All terminal navigation/close shortcuts are scoped with `"when": "terminalFocus"` where appropriate, so they only apply while the terminal has focus.
+All terminal navigation/close shortcuts are scoped with `"when": "terminalFocus"` where appropriate, so they only apply while the terminal has focus. The `alt+f2` rename binding uses both `terminalFocus` and `terminalTabsFocus`, and it also requires the terminal commands-to-skip-shell setting shown below.
 
 ## How To Apply On Another Computer
 
@@ -35,21 +37,35 @@ All terminal navigation/close shortcuts are scoped with `"when": "terminalFocus"
         "when": "terminalFocus"
     },
     {
-        "key": "alt+q",
+        "key": "alt+x",
         "command": "workbench.action.terminal.kill",
         "when": "terminalFocus"
     },
     {
-        "key": "alt+[Semicolon]",
+        "key": "alt+[Backquote]",
         "command": "workbench.action.terminal.toggleTerminal"
     },
     {
-        "key": "alt+shift+[Semicolon]",
+        "key": "alt+shift+q",
         "command": "workbench.action.terminal.new"
+    },
+    {
+        "key": "alt+q",
+        "command": "workbench.action.terminal.focus"
     },
     {
         "key": "alt+j",
         "command": "workbench.action.togglePanel"
+    },
+    {
+        "key": "alt+f2",
+        "command": "workbench.action.terminal.renameActiveTab",
+        "when": "terminalTabsFocus"
+    },
+    {
+        "key": "alt+f2",
+        "command": "workbench.action.terminal.rename",
+        "when": "terminalFocus"
     },
     {
         "key": "alt+1",
@@ -109,29 +125,48 @@ All terminal navigation/close shortcuts are scoped with `"when": "terminalFocus"
 ]
 ```
 
+Also make sure `settings.json` contains:
+
+```json
+{
+    "terminal.integrated.commandsToSkipShell": [
+        "workbench.action.terminal.rename",
+        "workbench.action.terminal.renameActiveTab"
+    ]
+}
+```
+
 If the target file already contains other keybindings, do not replace the whole file. Copy only the objects above into the existing top-level array and keep valid JSON commas between entries.
 
 ## Conflict Notes
 
-`alt+[Semicolon]`, `alt+shift+[Semicolon]`, and `alt+j` are usually safe because they are not common VS Code or Windows menu shortcuts. On Spanish keyboards, `[Semicolon]` is normally the physical `ñ` key.
+`alt+[Backquote]`, `alt+q`, `alt+shift+q`, `alt+j`, and `alt+f2` are usually safe because they are not common VS Code or Windows menu shortcuts in the terminal context. On Spanish keyboards, `[Backquote]` is normally the physical `º` key.
 
-`alt+w`, `alt+s`, `alt+q`, and `alt+1` to `alt+9` are intercepted by VS Code while the terminal has focus. This is intentional, but it means terminal applications such as Claude Code, OpenCode, shells, editors, or TUIs will not receive those exact key combinations.
+`alt+w`, `alt+s`, `alt+x`, `alt+f2`, and `alt+1` to `alt+9` are intercepted by VS Code while the terminal has focus. This is intentional, but it means terminal applications such as Claude Code, OpenCode, shells, editors, or TUIs will not receive those exact key combinations.
 
 ## AI Prompt
 
 Use this prompt if you want an AI assistant to apply the same setup on another machine:
 
 ```text
-Update my VS Code Keyboard Shortcuts JSON file to configure these integrated terminal shortcuts:
+Update my VS Code `keybindings.json` and `settings.json` to configure these integrated terminal shortcuts:
 
-- alt+[Semicolon]: workbench.action.terminal.toggleTerminal. This should use the physical ñ key on Spanish keyboards.
-- alt+shift+[Semicolon]: workbench.action.terminal.new. This should use the physical ñ key on Spanish keyboards.
+- alt+[Backquote]: workbench.action.terminal.toggleTerminal. This should use the physical `º` key on Spanish keyboards.
+- alt+shift+q: workbench.action.terminal.new
+- alt+q: workbench.action.terminal.focus
 - alt+j: workbench.action.togglePanel
-- alt+q: workbench.action.terminal.kill, only when terminalFocus
+- alt+f2: workbench.action.terminal.rename, when terminalFocus
+- alt+f2: workbench.action.terminal.renameActiveTab, when terminalTabsFocus
+- alt+x: workbench.action.terminal.kill, only when terminalFocus
 - alt+1 through alt+9: workbench.action.terminal.focusAtIndex1 through focusAtIndex9, only when terminalFocus
 - alt+w: workbench.action.terminal.focusPrevious, only when terminalFocus
 - alt+s: workbench.action.terminal.focusNext, only when terminalFocus
 - shift+enter: workbench.action.terminal.sendSequence with args text "\u001b\r", only when terminalFocus
 
-Please preserve any existing unrelated keybindings, merge these entries into the existing JSON array, keep the file valid JSON, and validate the result after editing.
+Also set `terminal.integrated.commandsToSkipShell` to include:
+
+- workbench.action.terminal.rename
+- workbench.action.terminal.renameActiveTab
+
+Please preserve any existing unrelated keybindings and settings, merge these entries into the existing files, keep both files valid JSON, and validate the result after editing.
 ```

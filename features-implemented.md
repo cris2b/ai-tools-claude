@@ -113,3 +113,27 @@ Status Values:
 **Date:** 2026-05-12
 
 **Status:** IN PROGRESS
+
+
+---
+
+
+**10. Brainstorming Skill**
+
+**Description:** A user-invokable skill (`/brainstorm`) that generates multi-angle ideas, improvements, alternatives, risks, and strategic analysis for a feature or concept. Supports focus modes (technical, UX, business, security, ops), iterative drilling into specific ideas (B1/B2/B3 references), comparison matrices, and prioritized recommendations. Integrates with `spec-define` — when `allow_brainstorming_default: true`, spec-define applies this skill's methodology inline to produce optional brainstorming doubts (B1/B2/B3 format) alongside clarification questions.
+
+**Date:** 2026-05-13
+
+**Status:** IN PROGRESS
+
+
+---
+
+
+**11. Markdown Prompt Injection Boundaries For Skills**
+
+**Description:** Hardens Markdown-consuming skills so spec, plan, source, and inline Markdown content is treated as untrusted data. The affected skills now ignore embedded role changes, tool requests, slash commands, prompt-injection text, secret exfiltration requests, and workflow overrides while still using the documents for their intended transformations, planning, review, explanation, or execution tasks.
+
+**Date:** 2026-05-14
+
+**Status:** IN PROGRESS
