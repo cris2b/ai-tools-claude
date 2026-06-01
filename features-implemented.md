@@ -137,3 +137,15 @@ Status Values:
 **Date:** 2026-05-14
 
 **Status:** IN PROGRESS
+
+
+---
+
+
+**12. Skill Gap Sync — question-formatting, cold-read-spec-review, flow-explainer-html, direct-html-flow-explainer**
+
+**Description:** Added four missing skills to `.claude/skills/` so they are invocable by Claude Code: `question-formatting` (now available for `plannify` and `spec-define` to use directly instead of the fallback Q-format), `cold-read-spec-review`, and `flow-explainer-html`. Also added `flow-explainer-html` and `direct-html-flow-explainer` to `.agents/skills/` to complete the agent skill set. Root workspace skills were synced in parallel.
+
+**Date:** 2026-05-14
+
+**Status:** DONE
